@@ -33,10 +33,13 @@ public class AdminController {
     private TagService tagService;
     @Resource
     private CommentService commentService;
+    @Resource
+    private ConfigService configService;
 
 
     @GetMapping({"/login"})
-    public String login() {
+    public String login(HttpServletRequest request) {
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/login";
     }
 
