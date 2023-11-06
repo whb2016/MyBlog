@@ -41,6 +41,8 @@ public class BlogController {
     private BlogService blogService;
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private Constants constants;
 
     @GetMapping("/blogs/list")
     @ResponseBody
@@ -196,9 +198,9 @@ public class BlogController {
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
         //创建文件
-        File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
+        File destFile = new File(constants.getFileUploadDic() + newFileName);
         String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + "/upload/" + newFileName;
-        File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
+        File fileDirectory = new File(constants.getFileUploadDic());
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {

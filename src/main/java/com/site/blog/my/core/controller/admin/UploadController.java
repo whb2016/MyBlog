@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author 13
@@ -31,6 +30,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/admin")
 public class UploadController {
+    @Resource
+    private Constants constants;
 
     @PostMapping({"/upload/file"})
     @ResponseBody
@@ -43,9 +44,9 @@ public class UploadController {
         StringBuilder tempName = new StringBuilder();
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
-        File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
+        File fileDirectory = new File(constants.getFileUploadDic());
         //创建文件
-        File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
+        File destFile = new File(constants.getFileUploadDic() + newFileName);
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {

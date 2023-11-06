@@ -1,8 +1,21 @@
 package com.site.blog.my.core.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by 13 on 2019/5/24.
  */
+@Component
 public class Constants {
-    public final static String FILE_UPLOAD_DIC = "/opt/deploy/upload/";//上传文件的默认url前缀，根据部署设置自行修改
+    @Value("${upload.dir}")
+    private String fileUploadDic;
+
+    public String getFileUploadDic() {
+        return fileUploadDic;
+    }
+
+    public void setFileUploadDic(String fileUploadDic) {
+        this.fileUploadDic = fileUploadDic;
+    }
 }
