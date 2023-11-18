@@ -2,6 +2,7 @@ package com.site.blog.my.core.util;
 
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 /**
@@ -9,9 +10,11 @@ import java.net.URI;
  */
 public class MyBlogUtils {
 
-    public static URI getHost(URI uri) {
+    public static URI getHost(HttpServletRequest request) {
         URI effectiveURI = null;
         try {
+            String host = StringUtils.hasText(request.getHeader("Origin")) ? request.getHeader("Origin") : request.getRequestURL() + "";
+            URI uri = new URI(host);
             effectiveURI = new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(), uri.getPort(), null, null, null);
         } catch (Throwable var4) {
             effectiveURI = null;

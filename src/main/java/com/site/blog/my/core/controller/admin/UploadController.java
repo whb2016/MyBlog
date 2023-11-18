@@ -55,7 +55,7 @@ public class UploadController {
             }
             file.transferTo(destFile);
             Result resultSuccess = ResultGenerator.genSuccessResult();
-            resultSuccess.setData(MyBlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
+            resultSuccess.setData(MyBlogUtils.getHost(httpServletRequest) + "/upload/" + newFileName);
             return resultSuccess;
         } catch (IOException e) {
             e.printStackTrace();
